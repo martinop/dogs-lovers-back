@@ -10,14 +10,14 @@ import { Dog } from "../entity/Dog";
 
 export default class Main implements Seeder {
   public async run(factory: Factory, connection: Connection): Promise<any> {
-		const vaccine = await factory(Vaccine)().createMany(10);
+		const vaccines = await factory(Vaccine)().createMany(10);
 		const medicaments = await factory(Medicament)().createMany(10);
 		const diseases = await factory(Disease)().createMany(10);
 
 		await factory(User)()
 		.map(async (user: User) => {
 			const dog = await factory(Dog)().create();
-			const shuffledVaccines = vaccine.sort(() => 0.5 - Math.random());
+			const shuffledVaccines = vaccines.sort(() => 0.5 - Math.random());
 			const shuffledMedicaments = medicaments.sort(() => 0.5 - Math.random());
 			const shuffledDiseases = diseases.sort(() => 0.5 - Math.random());
 			const randomLength = Math.floor(Math.random() * 6);
@@ -46,6 +46,13 @@ export default class Main implements Seeder {
 		user.email = "user@test.io";
 		user.notifications = await factory(Notification)().createMany(10);
 
+		const dog = await factory(Dog)().create();
+		dog.vaccines = vaccines.slice(0, 4);
+		dog.medicaments = medicaments.slice(0, 4);
+		dog.diseases = diseases.slice(0, 4);
+		await dog.save();
+
+		user.dog = dog;
 		await user.save();
   }
 }

@@ -32,5 +32,6 @@ export default `
   type Query {
     dog(id: ID!): Details
     dogs: [Dog]
+    myDog: Details
   }
 `

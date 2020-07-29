@@ -43,7 +43,6 @@ export class User extends BaseEntity {
   notifications?: Notification[];
 
   @OneToOne(type => Dog, dog => dog.owner)
-  @JoinColumn()
   dog: Dog;
 
   hashPassword() {

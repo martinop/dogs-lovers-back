@@ -6,6 +6,7 @@ import {
 	JoinTable,
 	ManyToMany,
 	OneToOne,
+	JoinColumn,
 } from "typeorm";
 import { Length } from "class-validator";
 import { Disease } from "./Disease";
@@ -38,5 +39,6 @@ export class Dog extends BaseEntity {
 	medicaments: Medicament[];
 
 	@OneToOne(type => User, user => user.dog)
+	@JoinColumn()
 	owner: User;
 }

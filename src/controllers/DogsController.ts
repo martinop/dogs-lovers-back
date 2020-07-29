@@ -19,6 +19,15 @@ class DogsController {
     } catch(e) {
       throw new Error(e);
     }
+	};
+	static myDog = async (parent: any, args: any, context: { userData: { id: number } }) => {
+		const { userData: { id } } = context;
+    try {
+			const dog = await getRepository(Dog).findOne({ where: { owner: +id }, relations: ['vaccines', 'medicaments', 'owner', 'diseases']});
+      return dog;
+    } catch(e) {
+      throw new Error(e);
+    }
   };
 };
 

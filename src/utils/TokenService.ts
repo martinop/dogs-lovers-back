@@ -4,7 +4,7 @@ import { UserRole } from "../types/user";
 
 class TokenService {
   static signToken({ id, email }: User, role: string = UserRole.USER) {
-    return jwt.sign({ userId: id, email, role }, process.env.JWT_SECRET as string);
+    return jwt.sign({ id, email, role }, process.env.JWT_SECRET as string);
   }
   static verifyToken(token: string){
     try {
