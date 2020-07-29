@@ -4,6 +4,10 @@ export default {
   Query: {
     dogs: DogsController.getAll,
 		dog: DogsController.getById,
-		myDog: DogsController.myDog,
+    myDog: DogsController.myDog,
+    props: DogsController.getProps,
   },
+  Mutation: {
+    create: DogsController.create,
+  }
 }

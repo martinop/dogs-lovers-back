@@ -14,5 +14,6 @@ export default new GraphQLModule({
     'Query.dogs': isVeterinarian,
 		'Query.dog': isVeterinarian,
 		'Query.myDog': isAuthenticated,
+		'Mutation.create': isAuthenticated,
   }
 })

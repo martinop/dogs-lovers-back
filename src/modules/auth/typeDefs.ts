@@ -2,7 +2,6 @@ export default `
 	input LoginInput {
 		email: String!
 		password: String!
-		role: String!
 	}
 
 	input SignupInput {
@@ -14,6 +13,7 @@ export default `
 	type User {
 		id: Int!
 		email: String!
+		role: String!
 		createdAt: String!
 		token: String!
 	}
