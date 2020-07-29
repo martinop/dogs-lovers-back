@@ -1,0 +1,46 @@
+{
+  "name": "dogs-lovers-backend",
+  "version": "1.0.0",
+  "description": "backend for vetify test",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/index.ts --exec ts-node",
+    "schema:drop": "ts-node ./node_modules/typeorm/cli.js schema:drop",
+    "schema:sync": "ts-node ./node_modules/typeorm/cli.js schema:sync",
+    "seed:run": "npm run schema:drop && ts-node ./node_modules/typeorm-seeding/dist/cli.js seed"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/martinop/dogs-lovers-back.git"
+  },
+  "author": "martin ocando",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/martinop/dogs-lovers-back/issues"
+  },
+  "homepage": "https://github.com/martinop/dogs-lovers-back#readme",
+  "dependencies": {
+    "@graphql-modules/core": "^0.7.17",
+    "@graphql-modules/utils": "^0.4.0",
+    "@types/bcryptjs": "^2.4.2",
+    "@types/express": "^4.17.7",
+    "@types/faker": "^4.1.12",
+    "@types/helmet": "0.0.47",
+    "@types/jsonwebtoken": "^8.5.0",
+    "@types/node": "^14.0.27",
+    "apollo-server-express": "^2.16.1",
+    "bcryptjs": "^2.4.3",
+    "class-validator": "^0.12.2",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "graphql": "^15.3.0",
+    "jsonwebtoken": "^8.5.1",
+    "nodemon": "^2.0.4",
+    "pg": "^8.3.0",
+    "reflect-metadata": "^0.1.13",
+    "ts-node": "^8.10.2",
+    "typeorm": "^0.2.25",
+    "typeorm-seeding": "^1.6.1",
+    "typescript": "^3.9.7"
+  }
+}
