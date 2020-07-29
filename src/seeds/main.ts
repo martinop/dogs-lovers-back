@@ -6,13 +6,33 @@ import { Vaccine } from "../entity/Vaccine";
 import { Medicament } from "../entity/Medicament";
 import { Disease } from "../entity/Disease";
 import { Notification } from "../entity/Notification";
+import { Dog } from "../entity/Dog";
 
 export default class Main implements Seeder {
   public async run(factory: Factory, connection: Connection): Promise<any> {
-		await factory(Vaccine)().createMany(10);
-		await factory(Medicament)().createMany(10);
-		await factory(Disease)().createMany(10);
+		const vaccine = await factory(Vaccine)().createMany(10);
+		const medicaments = await factory(Medicament)().createMany(10);
+		const diseases = await factory(Disease)().createMany(10);
 
+		await factory(User)()
+		.map(async (user: User) => {
+			const dog = await factory(Dog)().create();
+			const shuffledVaccines = vaccine.sort(() => 0.5 - Math.random());
+			const shuffledMedicaments = medicaments.sort(() => 0.5 - Math.random());
+			const shuffledDiseases = diseases.sort(() => 0.5 - Math.random());
+			const randomLength = Math.floor(Math.random() * 6);
+
+			dog.vaccines = shuffledVaccines.slice(0, randomLength);
+			dog.medicaments = shuffledMedicaments.slice(0, randomLength);
+			dog.diseases = shuffledDiseases.slice(0, randomLength);
+			await dog.save();
+
+			user.dog = dog;
+			
+			await user.save();
+			return user;
+		})
+		.createMany(5)
 		const veterinarian = new User()
 		veterinarian.password = "12345678";
 		veterinarian.hashPassword();
