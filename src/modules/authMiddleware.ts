@@ -11,6 +11,7 @@ export default new GraphQLModule({
     }
     type TokenData {
       userId: Int
+      role: String
 			email: String
 			iat: Int
 			exp: Int
