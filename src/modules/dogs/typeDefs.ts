@@ -20,26 +20,24 @@ export default `
     age: Int!
   }
 
+  type User {
+    id: Int!
+  }
+
   type Details {
     name: String!
     id: Int!
     age: Int!
     vaccines: [Vaccine]
 		medicaments: [Medicament]
-		diseases: [Disease]
+    diseases: [Disease]
+    owner: User
   }
 
   type Props {
     vaccines: [Vaccine]
 		medicaments: [Medicament]
 		diseases: [Disease]
-  }
-
-  type Query {
-    dog(id: ID!): Details
-    dogs: [Dog]
-    myDog: Details
-    props: Props
   }
 
   input InputDisease {
@@ -60,14 +58,30 @@ export default `
     diseases: [InputDisease]
     medicaments: [InputMedicament]
 		vaccines: [InputVaccine]
-
   }
   
-  type CreateResponse {
+  input UpdateDogInput {
+    id: Int!
+    owner: Int!
+    diseases: [InputDisease]
+    medicaments: [InputMedicament]
+		vaccines: [InputVaccine]
+  }
+
+  type GenericResponse {
     message: String!
   }
   
   type Mutation {
-		create(input: DogInput): CreateResponse!
-	}
+    create(input: DogInput): GenericResponse!
+    update(input: UpdateDogInput): GenericResponse!
+  }
+  
+  type Query {
+    dog(id: Int!): Details
+    dogs: [Dog]
+    myDog: Details
+    props: Props
+  }
+
 `

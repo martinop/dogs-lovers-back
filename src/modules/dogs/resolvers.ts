@@ -9,5 +9,6 @@ export default {
   },
   Mutation: {
     create: DogsController.create,
+    update: DogsController.update,
   }
 }

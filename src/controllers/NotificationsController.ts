@@ -8,7 +8,7 @@ class NotificationsController {
 			const me = new User();
 			me.id = context?.userData?.id;
 
-      const notifications = await getRepository(Notification).find({ user: me });
+      const notifications = await getRepository(Notification).find({ order: { createdAt: "DESC" }, where: { user: me } });
 
       return notifications;
     } catch(e) {

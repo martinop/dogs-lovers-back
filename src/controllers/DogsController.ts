@@ -3,11 +3,20 @@ import { Dog } from "../entity/Dog";
 import { Vaccine } from "../entity/Vaccine";
 import { Medicament } from "../entity/Medicament";
 import { Disease } from "../entity/Disease";
+import { Notification } from "../entity/Notification";
 import { User } from "../entity/User";
 
 type CreateInput = {
   age: number;
   name: string;
+  diseases: Disease[];
+  medicaments: Medicament[];
+  vaccines: Vaccine[];
+}
+
+type UpdateInput = {
+  id: number;
+  owner: number;
   diseases: Disease[];
   medicaments: Medicament[];
   vaccines: Vaccine[];
@@ -68,6 +77,24 @@ class DogsController {
       await dog.save();
       return { message: "Canino creado" }
     } catch(e) {
+      throw new Error(JSON.stringify(e));
+    }
+  }
+  static update = async (parent: any, args: { input: UpdateInput }) => {
+    const { id, owner: ownerId, diseases, medicaments, vaccines } = args.input;
+    try {
+      await getRepository(Dog).save({ id, medicaments, diseases, vaccines });
+      const owner = new User();
+      owner.id = ownerId;
+
+      const notification = new Notification();
+      notification.user = owner;
+      notification.title = "Algo ha cambiado en tu canino";
+      notification.description = "Un Veteriano ha cambiado algo en tu canino, revisalo!";
+      notification.save();
+      return { message: "Canino actualizado" }
+    } catch(e) {
+      console.log(e);
       throw new Error(JSON.stringify(e));
     }
   }
