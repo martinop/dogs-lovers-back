@@ -3,6 +3,7 @@ import { ApolloServer } from "apollo-server-express";
 import { GraphQLModule } from '@graphql-modules/core';
 import authModule from './modules/auth';
 import dogsModule from './modules/dogs';
+import notificationsModule from './modules/notifications';
 
 export async function startServer() {
   const app = express();
@@ -10,7 +11,8 @@ export async function startServer() {
     name: 'app',
     imports: [
       authModule,
-      dogsModule
+      dogsModule,
+      notificationsModule,
     ],
   });
   const server = new ApolloServer({
